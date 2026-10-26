@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+  :root{--ink:#0b0b0b;--ink2:#52514e;--line:#d6d5d0;--ok:#0f8a5f;--okbg:#e3f4ec;--py:#2a78d6;--pybg:#e6f0fc;--pend:#8a8983;--pendbg:#f1f0ec}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--ink);width:1600px;padding:36px 40px 30px}
+  h1{font-size:30px;margin-bottom:6px}
+  .sub{font-size:17px;color:var(--ink2);margin-bottom:26px}
+  .row{display:grid;grid-template-columns:repeat(7,1fr);gap:14px;align-items:stretch}
+  .card{border:2px solid var(--line);border-radius:14px;padding:16px 14px 14px;display:flex;flex-direction:column;gap:8px;background:#fff}
+  .n{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:19px;color:#fff}
+  .t{font-weight:700;font-size:18px;line-height:1.2}
+  .d{font-size:14.5px;color:var(--ink2);line-height:1.35;flex:1}
+  .tag{font-size:13px;font-weight:700;border-radius:999px;padding:5px 10px;align-self:flex-start}
+  .ok{border-color:var(--ok)} .ok .n{background:var(--ok)} .ok .tag{background:var(--okbg);color:var(--ok)}
+  .py{border-color:var(--py)} .py .n{background:var(--py)} .py .tag{background:var(--pybg);color:var(--py)}
+  .pend{border-style:dashed} .pend .n{background:var(--pend)} .pend .tag{background:var(--pendbg);color:var(--ink2)}
+  .marcos{display:grid;grid-template-columns:repeat(7,1fr);gap:14px;margin-top:16px}
+  .m{border-top:4px solid;padding-top:8px;font-size:15px;line-height:1.35}
+  .m b{display:block;font-size:16px}
+  .m1{grid-column:1/3;border-color:var(--ok)} .m2{grid-column:3/7;border-color:var(--py)} .m3{grid-column:1/8;border-color:var(--ink2);margin-top:4px}
+  .aqui{display:inline-block;background:var(--py);color:#fff;font-weight:700;font-size:13px;border-radius:6px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+  .leg{display:flex;gap:26px;margin-top:22px;font-size:15px;color:var(--ink2)}
+  .leg span{display:inline-flex;align-items:center;gap:8px}
+  .sw{width:18px;height:18px;border-radius:5px;border:2px solid}
+</style><style id="print">
+body.print{width:1120px;padding:20px 16px 16px}
+body.print h1{font-size:24px} body.print .sub{font-size:15px;margin-bottom:16px}
+body.print .row,body.print .marcos{gap:8px}
+body.print .card{padding:10px 8px;border-radius:10px;gap:6px}
+body.print .n{width:28px;height:28px;font-size:15px}
+body.print .t{font-size:15px} body.print .d{font-size:13px;line-height:1.3}
+body.print .tag{font-size:11.5px;padding:3px 7px}
+body.print .m{font-size:13px} body.print .m b{font-size:14px}
+body.print .aqui{font-size:11px}
+body.print .leg{font-size:13px;margin-top:14px;gap:18px}
+</style></head><body class="print">
+  <h1>Etapas do projeto e situação atual</h1>
+  <div class="sub">Tacômetro digital por análise espectral · ESP32-S3 + INMP441</div>
+  <div class="row">
+    <div class="card ok"><div class="n">1</div><div class="t">Aquisição do áudio</div><div class="d">INMP441 no ESP32-S3 via I2S, task FreeRTOS + fila, ganho calibrado</div><div class="tag">Implementada</div></div>
+    <div class="card ok"><div class="n">2</div><div class="t">Visualização do sinal</div><div class="d">Envio ao PC, forma de onda e espectrograma em Python</div><div class="tag">Implementada</div></div>
+    <div class="card py"><div class="n">3</div><div class="t">Filtro, janela e FFT</div><div class="d">Passa-faixa 120–170 Hz, janela de Hann e FFT</div><div class="tag">Validada em Python</div></div>
+    <div class="card py"><div class="n">4</div><div class="t">Sinais conhecidos</div><div class="d">5 frequências de teste (125–165 Hz), erro &lt; 0,15%</div><div class="tag">Validada em Python</div></div>
+    <div class="card pend"><div class="n">5</div><div class="t">Testes com a hélice</div><div class="d">Captura real na bancada, em várias rotações</div><div class="tag">Pendente</div></div>
+    <div class="card py"><div class="n">6</div><div class="t">Estimativa da RPM</div><div class="d">Pico + interpolação parabólica, RPM = f × 60 / nº de pás</div><div class="tag">Validada em Python</div></div>
+    <div class="card pend"><div class="n">7</div><div class="t">Validação e resultados</div><div class="d">Comparação com a RPM do ESC, erro absoluto e percentual</div><div class="tag">Pendente</div></div>
+  </div>
+  <div class="marcos">
+    <div class="m m1"><b>Entrega parcial 1 · 05/10</b>Etapas 1 e 2</div>
+    <div class="m m2"><b>Entrega parcial 2 · 26/10 <span class="aqui">ESTAMOS AQUI</span></b>Etapas 3, 4 e 6 validadas em Python; próximo: embarcar no ESP32</div>
+    <div class="m m3"><b>Entrega final · 23/11</b>FFT e RPM no ESP32, testes com a hélice (5) e validação com o ESC (7)</div>
+  </div>
+  <div class="leg">
+    <span><i class="sw" style="border-color:var(--ok);background:var(--okbg)"></i>Implementada no ESP32</span>
+    <span><i class="sw" style="border-color:var(--py);background:var(--pybg)"></i>Validada em Python (falta embarcar)</span>
+    <span><i class="sw" style="border-color:var(--pend);border-style:dashed;background:var(--pendbg)"></i>Pendente</span>
+  </div>
+</body></html>
